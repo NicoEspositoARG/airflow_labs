@@ -37,12 +37,12 @@ default_args = {
 }
 
 with DAG(
-    "12_tutorial_etl_dag",
+    "11_tutorial_etl_dag",
     default_args=default_args,
     description="ETL DAG tutorial",
     schedule_interval=None,
     start_date=days_ago(2),
-    tags=["ejemplo", "xcoms"],
+    tags=["ejemplos", "xcoms"],
 ) as dag:
     dag.doc_md = __doc__
 
