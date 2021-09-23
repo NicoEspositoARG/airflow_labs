@@ -20,12 +20,15 @@ from airflow import DAG
 from airflow.models import TaskInstance
 from airflow.operators.bash import BashOperator
 from airflow.operators.dummy import DummyOperator
+from airflow.utils.trigger_rule import TriggerRule
 
 default_args = {
     "owner": "mi_empresa",
     "params": {
         "prioridad": "alta",
     },
+    "email": ["notificaciones.airflow.lab.21@gmail.com"],
+    "email_on_failure": False,
 }
 
 
@@ -59,6 +62,7 @@ with DAG(
         task_id="fallara",
         bash_command="exit 1",
         on_failure_callback=sonar_alarma,
+        email_on_failure=True,
     )
     demora_demasiado = BashOperator(
         task_id="demora_demasiado",
@@ -71,6 +75,8 @@ with DAG(
         bash_command="exit 1",
         retries=2,
         retry_delay=timedelta(seconds=20),
+        email_on_failure=False,
+        email_on_retry=True,
     )
 
     inicio = DummyOperator(task_id="inicio")
@@ -80,6 +86,7 @@ with DAG(
     multiples_upstreams = BashOperator(
         task_id="multiples_upstreams",
         bash_command="echo 'éxito!' ",
+        trigger_rule=TriggerRule.ALL_DONE,
     )
 
     procesando = BashOperator(
