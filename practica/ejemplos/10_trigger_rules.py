@@ -1,8 +1,13 @@
+"""
+[Source](https://airflow.apache.org
+/docs/apache-airflow/stable/concepts/dags.html#trigger-rules)
+"""
 import datetime as dt
 
 from airflow.models import DAG
 from airflow.operators.dummy import DummyOperator
 from airflow.operators.python import BranchPythonOperator
+from airflow.utils.trigger_rule import TriggerRule
 
 dag = DAG(
     dag_id="branch_without_trigger",
@@ -21,7 +26,7 @@ follow_branch_a = DummyOperator(task_id="follow_branch_a", dag=dag)
 branch_false = DummyOperator(task_id="branch_false", dag=dag)
 
 join = DummyOperator(task_id="join", dag=dag)
-#  trigger_rule="none_failed_or_skipped"
+#  trigger_rule=TriggerRule.NONE_FAILED_OR_SKIPPED
 
 run_this_first >> branching
 branching >> branch_a >> follow_branch_a >> join
