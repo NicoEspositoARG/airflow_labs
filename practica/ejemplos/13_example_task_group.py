@@ -22,7 +22,6 @@ from airflow.models.dag import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.dummy import DummyOperator
 from airflow.utils.dates import days_ago
-from airflow.utils.helpers import S
 from airflow.utils.task_group import TaskGroup
 
 with DAG(

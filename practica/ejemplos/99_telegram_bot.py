@@ -35,7 +35,7 @@ dag = DAG(
 enviar_mensaje_telegram = TelegramOperator(
     task_id="enviar_mensaje_telegram",
     telegram_conn_id="telegram_bot_conn",
-    chat_id="252499xxxxx",  # cambiar por el chat Id del destinatario
+    chat_id="252499569",  # cambiar por el chat Id del destinatario
     text="Primer mensaje desde Airflow!",
     dag=dag,
 )

@@ -17,7 +17,7 @@ with DAG(
 
     archivo_existente = FileSensor(
         task_id="archivo_existente",
-        filepath="/home/onsa/dataset_buscado.csv"
+        filepath="/home/vagrant/dataset_buscado.csv"
         # fs_conn_id='fs_default'
     )
 
